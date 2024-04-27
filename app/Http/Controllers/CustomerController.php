@@ -33,11 +33,11 @@ class CustomerController extends Controller
     {
         $customer = new customer();
         $customer->document_number = $request->document_number;
-        $customer->first_name = $request->name;
-        $customer->last_name = $request->apellido;
-        $customer->address = $request->direccion;
-        $customer->birthday = $request->fecha_nacimiento;
-        $customer->phone_number = $request->telefono;
+        $customer->nombre = $request->name;
+        $customer->apellido = $request->apellido;
+        $customer->direccion = $request->direccion;
+        $customer->fecha_nacimiento = $request->fecha_nacimiento;
+        $customer->telefono = $request->telefono;
         $customer->id = $request->id;
         $customer->email = $request->email;
         $customer->save();
@@ -73,11 +73,11 @@ class CustomerController extends Controller
         $customer = customer::find($id);
 
         $customer->document_number = $request->document_number;
-        $customer->first_name = $request->nombre;
-        $customer->last_name = $request->apellido;
-        $customer->birthday = $request->fecha_nacimiento;
-        $customer->address = $request->direccion;
-        $customer->phone_number = $request->telefono;
+        $customer->nombre = $request->nombre;
+        $customer->apellido = $request->apellido;
+        $customer->fecha_nacimiento = $request->fecha_nacimiento;
+        $customer->direccion = $request->direccion;
+        $customer->telefono = $request->telefono;
         $customer->email = $request->email;
         // $customer->id = $request->id;
         $customer->save();

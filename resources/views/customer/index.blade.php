@@ -34,12 +34,12 @@
                     @foreach ($customers as $customer)
                         <tr>
                             <th scope="row">{{$customer->id}}</th>
-                            <td>{{$customer->document_number}}</td>
-                            <td>{{$customer->first_name}}</td>
-                            <td>{{$customer->last_name}}</td>
-                            <td>{{$customer->birthday}}</td>
-                            <td>{{$customer->address}}</td>
-                            <td>{{$customer->phone_number}}</td>
+                            <td>{{$customer->nombre}}</td>
+                            <td>{{$customer->apellido}}</td>
+                            <td>{{$customer->fecha_nacimiento}}</td>
+                            <td>{{$customer->direccion}}</td>
+                            <td>{{$customer->direccion}}</td>
+                            <td>{{$customer->telefono}}</td>
                             <td>{{$customer->email}}</td>
 
                        
