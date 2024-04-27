@@ -86,14 +86,16 @@
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-4">
                     <div class="mb-3">
-                        <label for="direccion" class="form-label">Dirección</label>
-                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="mb-3">
                         <label for="telefono" class="form-label">Teléfono</label>
                         <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Teléfono">
+                    </div>
+                </div>
+
+                
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Cedula</label>
+                        <input type="text" class="form-control" id="document_number" name="document_number" placeholder="Cedula">
                     </div>
                 </div>
 

@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-12 text-center">
                 <div class="alert alert-success" role="alert">
-                    <h1 class="mb-0" style="color: green;">CITAS</h1>
+                    <h1 class="mb-0" style="color: green;">CUSTOMERS</h1>
                 </div>
                 <a href="{{ route('customers.create')}}" class="btn btn-success float-start">Agregar </a>
                 <table class="table table-striped">
@@ -34,12 +34,12 @@
                     @foreach ($customers as $customer)
                         <tr>
                             <th scope="row">{{$customer->id}}</th>
-                            <td>{{$customer->nombre}}</td>
-                            <td>{{$customer->apellido}}</td>
-                            <td>{{$customer->fecha_nacimiento}}</td>
-                            <td>{{$customer->direccion}}</td>
-                            <td>{{$customer->direccion}}</td>
-                            <td>{{$customer->telefono}}</td>
+                            <td>{{$customer->document_number}}</td>
+                            <td>{{$customer->first_name}}</td>
+                            <td>{{$customer->last_name}}</td>
+                            <td>{{$customer->birthday}}</td>
+                            <td>{{$customer->address}}</td>
+                            <td>{{$customer->phone_number}}</td>
                             <td>{{$customer->email}}</td>
 
                        
