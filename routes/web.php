@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\categoriesController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\CustomerController;
 
 
 
@@ -34,6 +35,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/products/{product}', [productsController::class, 'destroy'])->name('products.destroy');
     Route::put('/products/{product}', [productsController::class, 'update'])->name('products.update');
     Route::get('/products/{product}/edit', [productsController::class, 'edit'])->name('products.edit');
+
+    Route::get('/customers', [CustomerController::class, 'index'])->name('customers.index');
+    Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
+    Route::get('/customers/create', [CustomerController::class, 'create'])->name('customers.create');
+    Route::delete('/customers/{customer}', [CustomerController::class, 'destroy'])->name('customers.destroy');
+    Route::put('/customers/{customer}', [CustomerController::class, 'update'])->name('customers.update');
+    Route::get('/customers/{customer}/edit', [CustomerController::class, 'edit'])->name('customers.edit');
 });
 
 require __DIR__ . '/auth.php';
