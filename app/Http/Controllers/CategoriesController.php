@@ -62,7 +62,6 @@ class CategoriesController extends Controller
         $categorie = categorie::find($id);
         $categorie->name = $request->name;
         $categorie->description = $request->description;
-        $categorie->id = $request->id;
         $categorie->save();
         return redirect()->route("categories.index");
     }
@@ -74,5 +73,6 @@ class CategoriesController extends Controller
     {
         $categorie = categorie::find($id);
         $categorie->delete();
+        return redirect()->route("categories.index");
     }
 }
