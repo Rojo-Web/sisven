@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -11,7 +13,10 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        $products = DB::table('Products')
+            ->join('Categories', 'Products.category_id', '=', 'Categories.id')
+            ->select('Products.*', "Categories.name as nameC")->get();
+        return view('product.index', ['products' => $products]);
     }
 
     /**
@@ -19,7 +24,10 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        $categories = DB::table('categories')
+            ->orderBy('name')
+            ->get();
+        return view('product.new', ["categories" => $categories]);
     }
 
     /**
@@ -27,7 +35,14 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new product();
+        $product->name = $request->name;
+        $product->price = intval($request->price);
+        $product->stock = intval($request->stock);
+        $product->category_id = $request->category_id;
+        $product->id = $request->id;
+        $product->save();
+        return redirect()->route("products.index");
     }
 
     /**
@@ -43,7 +58,11 @@ class ProductsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = product::find($id);
+        $categories = DB::table('categories')
+            ->orderBy('name')
+            ->get();
+        return view('product.edit', ['product' => $product, "categories" => $categories]);
     }
 
     /**
@@ -51,7 +70,13 @@ class ProductsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $product = product::find($id);
+        $product->name = $request->name;
+        $product->price = intval($request->price);
+        $product->stock = intval($request->stock);
+        $product->category_id = $request->category_id;
+        $product->save();
+        return redirect()->route("products.index");
     }
 
     /**
@@ -59,6 +84,9 @@ class ProductsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = product::find($id);
+        $product->delete();
+
+        return redirect()->route("products.index");
     }
 }
