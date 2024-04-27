@@ -61,7 +61,7 @@
                 <div class="col-md-4">
                     <div class="mb-3">
                         <label for="apellido" class="form-label">Dirección</label>
-                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="direccion">
+                        <input type="text" class="form-control" id="address" name="address" placeholder="direccion">
                     </div>
                 </div>
             </div>

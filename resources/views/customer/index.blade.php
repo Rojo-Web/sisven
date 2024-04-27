@@ -37,10 +37,21 @@
                             <td>{{$customer->document_number}}</td>
                             <td>{{$customer->first_name}}</td>
                             <td>{{$customer->last_name}}</td>
-                            <td>{{$customer->birthday}}</td>
                             <td>{{$customer->address}}</td>
+                            <td>{{$customer->birthday}}</td>
                             <td>{{$customer->phone_number}}</td>
                             <td>{{$customer->email}}</td>
+
+                            <td> <a href="{{route('customers.edit',['customer'=>$customer->id]) }}" class="btn btn-info">Edit</a>
+
+                                <form action="{{route('customers.destroy', ['customer' => $customer->id]) }}" method="POST" style="display: inline-block">
+                                    @method('delete')
+                                    @csrf
+                                    <input class="btn btn-danger" type="submit" value="Delete">
+                                </form>
+                            </td>
+
+                        </tr>
 
                        
                     @endforeach                      

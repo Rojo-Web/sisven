@@ -35,7 +35,7 @@ class CustomerController extends Controller
         $customer->document_number = $request->document_number;
         $customer->first_name = $request->name;
         $customer->last_name = $request->apellido;
-        $customer->address = $request->direccion;
+        $customer->address = $request->address;
         $customer->birthday = $request->fecha_nacimiento;
         $customer->phone_number = $request->telefono;
         $customer->id = $request->id;
@@ -73,16 +73,15 @@ class CustomerController extends Controller
         $customer = customer::find($id);
 
         $customer->document_number = $request->document_number;
-        $customer->first_name = $request->nombre;
+        $customer->first_name = $request->name;
         $customer->last_name = $request->apellido;
         $customer->birthday = $request->fecha_nacimiento;
-        $customer->address = $request->direccion;
+        $customer->address = $request->address;
         $customer->phone_number = $request->telefono;
         $customer->email = $request->email;
         // $customer->id = $request->id;
         $customer->save();
 
-        $customers = customer::all();
 
         return redirect()->route("customers.index");
     }
