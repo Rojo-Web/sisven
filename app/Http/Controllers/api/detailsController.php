@@ -19,7 +19,7 @@ class detailsController extends Controller
         $details = DB::table('_details')
             ->join('invoices', '_details.invoice_id', '=', 'invoices.id')
             ->join('products', '_details.product_id', '=', 'products.id')
-            ->select('invoices.*', 'invoices.number as invoices_number','invoices.date as invoices_date', 'products.name as products_name', 'products.price as products_price', 'products.stock as products_stock')
+            ->select('_details.*', 'invoices.number as invoices_number','invoices.date as invoices_date', 'products.name as products_name', 'products.price as products_price', 'products.stock as products_stock')
             ->get();
             return json_encode(['details' => $details]);
     }
