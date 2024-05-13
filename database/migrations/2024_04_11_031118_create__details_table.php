@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('_details', function (Blueprint $table) {
             $table->id();
-            $table->integer('invoice_id')->nullable();
-            $table->integer('product_id')->nullable();
+            $table->foreignId('invoice_id')->nullable()->references('id')->on('invoices');
+            $table->foreignId('product_id')->nullable()->references('id')->on('products');
             $table->integer('quantity')->nullable();
             $table->integer('price')->nullable();
             $table->timestamps();

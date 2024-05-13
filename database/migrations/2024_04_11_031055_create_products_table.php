@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name',80)->nullable();
             $table->integer('price')->nullable();
             $table->integer('stock')->nullable();
-            $table->integer('category_id')->nullable();
+            $table->foreignId('category_id')->nullable()->references('id')->on('categories');
             $table->timestamps();
         });
     }
