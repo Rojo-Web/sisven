@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->integer('number')->unique();
-            $table->foreignId('customer_id')->nullable()->constrained('_customers');
+            $table->string('customer_id')->nullable();
+            $table->foreign('customer_id')->references('document_number')->on('_customers')->nullOnDelete();
             $table->date('date')->nullable();
-            $table->foreignId('pay_mode_id')->nullable()->constrained('pay_mode');
+            $table->foreignId('pay_mode_id')->nullable()->references('id')->on('pay_mode');
             $table->timestamps();
         });
     }
