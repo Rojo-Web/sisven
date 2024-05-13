@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\categoriesController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PaymodeController;
 
 Route::get('/', function () {
@@ -48,6 +49,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/paymodes/{paymode}', [PaymodeController::class, 'destroy'])->name('paymodes.destroy');
     Route::put('/paymodes/{paymode}', [PaymodeController::class, 'update'])->name('paymodes.update');
     Route::get('/paymodes/{paymode}/edit', [PaymodeController::class, 'edit'])->name('paymodes.edit');
+
+    Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
+    Route::post('/invoices', [InvoiceController::class, 'store'])->name('invoices.store');
+    Route::get('/invoices/create', [InvoiceController::class, 'create'])->name('invoices.create');
+    Route::delete('/invoices/{invoice}', [InvoiceController::class, 'destroy'])->name('invoices.destroy');
+    Route::put('/invoices/{invoice}', [InvoiceController::class, 'update'])->name('invoices.update');
+    Route::get('/invoices/{invoice}/edit', [InvoiceController::class, 'edit'])->name('invoices.edit');
 });
 
 require __DIR__ . '/auth.php';

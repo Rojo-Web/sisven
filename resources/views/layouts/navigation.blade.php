@@ -25,7 +25,10 @@
                         {{ __('Clientes') }}
                     </x-nav-link>
                     <x-nav-link :href="route('paymodes.index')" :active="request()->routeIs('paymodes.index')">
-                        {{ __('Paymode') }}
+                        {{ __('Paymodes') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('invoices.index')" :active="request()->routeIs('invoices.index')">
+                        {{ __('Invoices') }}
                     </x-nav-link>
                 </div>
             </div>
