@@ -5,6 +5,7 @@ use App\Http\Controllers\api\categoriesController;
 use App\Http\Controllers\api\paymodesController;
 use App\Http\Controllers\api\invoicesController;
 use App\Http\Controllers\api\detailsController;
+use App\Http\Controllers\api\CustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -47,3 +48,9 @@ Route::delete('/details/{detail}', [detailsController::class,'destroy'])->name('
 Route::get('/details/{detail}', [detailsController::class,'show'])->name('details.show');
 Route::put('/details/{detail}', [detailsController::class,'update'])->name('details.update');
 
+//Customers
+Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
+Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
+// Route::get('/customers/create', [CustomerController::class, 'create'])->name('customers.create');
+Route::delete('/customers/{customer}', [CustomerController::class, 'destroy'])->name('customers.destroy');
+Route::put('/customers/{customer}', [CustomerController::class, 'update'])->name('customers.update');
