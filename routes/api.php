@@ -3,6 +3,8 @@
 use App\Http\Controllers\api\productsController;
 use App\Http\Controllers\api\categoriesController;
 use App\Http\Controllers\api\paymodesController;
+use App\Http\Controllers\api\invoicesController;
+use App\Http\Controllers\api\detailsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,4 +32,18 @@ Route::post('/paymodes', [paymodesController::class,'store'])->name('paymodes.st
 Route::delete('/paymodes/{paymode}', [paymodesController::class,'destroy'])->name('paymodes.destroy');
 Route::get('/paymodes/{paymode}', [paymodesController::class,'show'])->name('paymodes.show');
 Route::put('/paymodes/{paymode}', [paymodesController::class,'update'])->name('paymodes.update');
+
+//invoices
+Route::get('/invoices', [invoicesController::class,'index'])->name('invoices');
+Route::post('/invoices', [invoicesController::class,'store'])->name('invoices.store');
+Route::delete('/invoices/{invoice}', [invoicesController::class,'destroy'])->name('invoices.destroy');
+Route::get('/invoices/{invoice}', [invoicesController::class,'show'])->name('invoices.show');
+Route::put('/invoices/{invoice}', [invoicesController::class,'update'])->name('invoices.update');
+
+//details
+Route::get('/details', [detailsController::class,'index'])->name('details');
+Route::post('/details', [detailsController::class,'store'])->name('details.store');
+Route::delete('/details/{detail}', [detailsController::class,'destroy'])->name('details.destroy');
+Route::get('/details/{detail}', [detailsController::class,'show'])->name('details.show');
+Route::put('/details/{detail}', [detailsController::class,'update'])->name('details.update');
 

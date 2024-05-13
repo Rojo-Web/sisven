@@ -4,7 +4,10 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Invoice;
 
+use \Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 class invoicesController extends Controller
 {
     /**
@@ -12,7 +15,12 @@ class invoicesController extends Controller
      */
     public function index()
     {
-        //
+        $invoices = DB::table('invoices')
+            ->join('_customers', 'invoices.customer_id', '=', '_customers.document_number')
+            ->join('pay_mode', 'invoices.pay_mode_id', '=', 'pay_mode.id')
+            ->select('invoices.*', '_customers.first_name as customer_name', 'pay_mode.name as paymode_name', '_customers.last_name as customer_last_name')
+            ->get();
+            return json_encode(['invoices' => $invoices]);
     }
 
     /**
@@ -20,7 +28,28 @@ class invoicesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = Validator::make($request->all(),[
+            'number'=> ['required'],
+            'customer_id'=> ['required'],
+            'date'=> ['required'],
+            'pay_mode_id'=> ['required'],
+        ]);
+
+        if($validate->fails()){
+            return response()->json([
+                'msg'=> 'Se produjo un error en la validacion de la informacion ',
+                'statusCode'=> 400
+            ]);
+        }
+
+        // Validar los datos del formulario
+        $invoice = new Invoice();
+        $invoice->number = $request->number;
+        $invoice->customer_id = $request->customer_id;
+        $invoice->date = date("Y-m-d H:i:s");
+        $invoice->pay_mode_id = $request->pay_mode_id;
+        $invoice->save();
+        return json_encode(['invoice' => $invoice,'success'=>true]);
     }
 
     /**
@@ -28,7 +57,12 @@ class invoicesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $invoices = DB::table('invoices')
+        ->join('_customers', 'invoices.customer_id', '=', '_customers.id')
+        ->join('pay_mode', 'invoices.pay_mode_id', '=', 'pay_mode.id')
+        ->select('invoices.*', '_customers.first_name as customer_name', 'pay_mode.name as paymode_name', '_customers.last_name as customer_last_name')
+        ->get();
+        return json_encode(['invoices' => $invoices]);
     }
 
     /**
@@ -36,7 +70,16 @@ class invoicesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $invoice = Invoice::find($id);
+        if (is_null($invoice)){
+            return abort(404);
+        }
+        $invoice->number = $request->number;
+        $invoice->customer_id = $request->customer_id;
+        $invoice->date = date("Y-m-d H:i:s");
+        $invoice->pay_mode_id = $request->pay_mode_id;
+        $invoice->save();
+        return json_encode(['invoice' => $invoice,'success'=>true]);
     }
 
     /**
@@ -44,6 +87,11 @@ class invoicesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $invoice = Invoice::find($id);
+        if (is_null($invoice)){
+            return abort(404);
+        }
+        $invoice->delete();
+        return json_encode(['invoice' => $invoice,'success'=>true]);
     }
 }
