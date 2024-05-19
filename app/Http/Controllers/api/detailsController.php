@@ -47,8 +47,8 @@ class detailsController extends Controller
         $detail = new details();
         $detail->invoice_id = $request->invoice_id;
         $detail->product_id = $request->product_id;
-        $detail->quantity = $request->quantity;
-        $detail->price = $request->price;
+        $detail->quantity = intval($request->quantity);
+        $detail->price = intval($request->price);
         $detail->save();
         return json_encode(['detail' => $detail,'success'=>true]);
     }
@@ -58,12 +58,20 @@ class detailsController extends Controller
      */
     public function show(string $id)
     {
-        $details = DB::table('_details')
-        ->join('invoices', '_details.invoice_id', '=', 'invoices.id')
-        ->join('products', '_details.product_id', '=', 'products.id')
-        ->select('invoices.*', 'invoices.number as invoices_number','invoices.date as invoices_date', 'products.name as products_name', 'products.price as products_price', 'products.stock as products_stock')
-        ->get();
-        return json_encode(['details' => $details]);
+
+        $details = details::find($id);
+        if (is_null($details)){
+            return abort(404);
+        }
+
+        $products = DB::table('products')
+            ->orderBy('name')
+            ->get();
+        $invoices = DB::table('invoices')
+            ->orderBy('number')
+            ->get();
+        return json_encode(['detail' => $details,"products" => $products,"invoices" => $invoices]);
+
     }
 
     /**

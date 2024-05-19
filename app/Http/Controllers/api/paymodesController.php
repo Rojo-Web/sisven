@@ -49,8 +49,11 @@ class paymodesController extends Controller
      */
     public function show(string $id)
     {
-        $paymodes = Paymode::all();
-        return json_encode(['paymodes' => $paymodes]);
+        $paymode = Paymode::find($id);
+        if (is_null($paymode)){
+            return abort(404);
+        }
+        return json_encode(['paymode' => $paymode]);
     }
 
     /**
@@ -77,6 +80,7 @@ class paymodesController extends Controller
         if (is_null($paymode)){
             return abort(404);
         }
+        $paymode = Paymode::find($id);  
         $paymode->delete();
         return json_encode(['paymode' => $paymode,'success'=>true]);
     }

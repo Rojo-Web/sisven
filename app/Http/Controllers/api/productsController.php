@@ -15,6 +15,7 @@ class productsController extends Controller
      */
     public function index()
     {
+        
         $products = DB::table('Products')
             ->join('Categories', 'Products.category_id', '=', 'Categories.id')
             ->select('Products.*', "Categories.name as nameC")->get();
@@ -59,7 +60,7 @@ class productsController extends Controller
         if (is_null($product)){
             return abort(404);
         }
-        $product = product::find($id);
+
         $categories = DB::table('categories')
             ->orderBy('name')
             ->get();

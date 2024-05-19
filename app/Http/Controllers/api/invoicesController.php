@@ -44,9 +44,9 @@ class invoicesController extends Controller
 
         // Validar los datos del formulario
         $invoice = new Invoice();
-        $invoice->number = $request->number;
+        $invoice->number = intval($request->number);
         $invoice->customer_id = $request->customer_id;
-        $invoice->date = date("Y-m-d H:i:s");
+        $invoice->date = $request->date;
         $invoice->pay_mode_id = $request->pay_mode_id;
         $invoice->save();
         return json_encode(['invoice' => $invoice,'success'=>true]);
@@ -57,12 +57,25 @@ class invoicesController extends Controller
      */
     public function show(string $id)
     {
-        $invoices = DB::table('invoices')
-        ->join('_customers', 'invoices.customer_id', '=', '_customers.id')
-        ->join('pay_mode', 'invoices.pay_mode_id', '=', 'pay_mode.id')
-        ->select('invoices.*', '_customers.first_name as customer_name', 'pay_mode.name as paymode_name', '_customers.last_name as customer_last_name')
-        ->get();
-        return json_encode(['invoices' => $invoices]);
+        // $invoices = Invoice::table('invoices')
+        // ->join('_customers', 'invoices.customer_id', '=', '_customers.id')
+        // ->join('pay_mode', 'invoices.pay_mode_id', '=', 'pay_mode.id')
+        // ->select('invoices.*', '_customers.first_name as customer_name', 'pay_mode.name as paymode_name', '_customers.last_name as customer_last_name')
+        // ->get();
+        // return json_encode(['invoices' => $invoices]);
+
+        $invoice = Invoice::find($id);
+        if (is_null($invoice)){
+            return abort(404);
+        }
+
+        $customers = DB::table('_customers')
+            ->orderBy('document_number')
+            ->get();
+        $paymodes = DB::table('pay_mode')
+            ->orderBy('name')
+            ->get();
+        return json_encode(['invoice' => $invoice,"customers" => $customers,"paymodes" => $paymodes]);
     }
 
     /**
