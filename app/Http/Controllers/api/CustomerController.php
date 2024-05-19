@@ -49,7 +49,7 @@ class CustomerController extends Controller
         $customer->last_name = $request->last_name;
         $customer->address = $request->address;
         $customer->birthday = $request->birthday;
-        $customer->phone_number = $request->telephone_numberfono;
+        $customer->phone_number = $request->phone_number;
         $customer->id = $request->id;
         $customer->email = $request->email;
         $customer->save();
@@ -103,7 +103,7 @@ class CustomerController extends Controller
         $customer->last_name = $request->last_name;
         $customer->address = $request->address;
         $customer->birthday = $request->birthday;
-        $customer->phone_number = $request->telephone_numberfono;
+        $customer->phone_number = $request->phone_number;
         $customer->email = $request->email;
         $customer->save();
 
