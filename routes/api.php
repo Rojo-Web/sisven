@@ -50,6 +50,7 @@ Route::put('/details/{detail}', [detailsController::class,'update'])->name('deta
 
 //Customers
 Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
+Route::get('/customers/{customer}', [CustomerController::class, 'show'])->name('customers.show');
 Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
 // Route::get('/customers/create', [CustomerController::class, 'create'])->name('customers.create');
 Route::delete('/customers/{customer}', [CustomerController::class, 'destroy'])->name('customers.destroy');
