@@ -13,7 +13,7 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
 Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
-Route::delete('/customers/{cusomer}', [CustomerController::class, 'destroy'])->name('customers.destroy');
+Route::delete('/customers/{customer}', [CustomerController::class, 'destroy'])->name('customers.destroy');
 Route::get('/customers/{customer}', [CustomerController::class, 'show'])->name('customers.show');
 Route::post('/customers/{customer}', [CustomerController::class, 'update'])->name('customers.update');
 
